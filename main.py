@@ -1,51 +1,44 @@
-from numpy.ma.core import count
-from yahoo_fin import stock_info
-from datetime import datetime
-from datetime import date
-import csv
+from tkinter import *
+import subprocess
 
-Stocks = ['GOOG', 'AAPL']
+root = Tk()
 
-def File_Maker(Asset):
-    data = [
-        ['Date', 'Time', 'Price']
-    ]
-    Date = str(date.today())
-    with open(Asset + Date + '.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(data)
+root.title("S.T.E.V.E.E")
+root.geometry('420x200')
 
-def Data_Fetch(Asset):
-    Data = stock_info.get_live_price(Asset)
-    return Data
+def Trading_Capital():
+    def clicked():
+        res = "Confirmed: " + txt.get()
+        lbl2.configure(text=res)
 
-def Data_Write(Asset):
-    Price = Data_Fetch(Asset)
-    Date = str(date.today())
-    Time = datetime.now()
-    Time = Time.strftime('%H:%M:%S')
+    lbl1 = Label(root, text="Trading Capital?")
+    lbl1.grid(column=0, row=0)
 
-    New_Data = [Date, Time, Price]
-    with open(Asset + Date + '.csv', mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(New_Data)
+    lbl2 = Label(root)
+    lbl2.grid(column=3, row=0)
 
-# Startup Code
-for i in range(count(Stocks)):
-    File_Maker(Stocks[i])
+    btn1 = Button(root, text="Confirm",
+                  fg="red", command=clicked)
 
-# Main Code
-Hour = 0    # Should be 14
-Min = 19    # Should be 30
-while True:
-    Time = datetime.now()
-    if Time.hour == Hour and Time.minute == Min:
-        for i in range(count(Stocks)):
-            Data_Write(Stocks[i])
-        Min = Min + 1
-        if Min > 60:
-            Hour = Hour + 1
-            Min = 0
-        if Hour == 21:
-            Hour = 14
-            Min = 30
+    btn1.grid(column=2, row=0)
+
+    txt = Entry(root, width=10)
+    txt.grid(column=1, row=0)
+
+def Initiate_Trading():
+    def clicked():
+        res = 'Initiating'
+        lbl1.configure(text=res)
+        subprocess.run(['python', 'DataDownload.py'])
+
+    btn1 = Button(root, text='Start Trading',
+                  fg='green', command=clicked)
+
+    lbl1 = Label(root)
+    lbl1.grid(column =2, row =1)
+
+    btn1.grid(column=1, row=1)
+
+Trading_Capital()
+Initiate_Trading()
+root.mainloop()
