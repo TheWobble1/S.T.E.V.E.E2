@@ -39,6 +39,39 @@ def Initiate_Trading():
 
     btn1.grid(column=1, row=1)
 
+def Statisitics():
+    lbl1 = Label(root, text='Avalible Capital')
+    lbl1.grid(column=0, row=2)
+
+    lbl2 = Label(root, text='Error')
+    lbl2.grid(column=1, row=2)
+
+    lbl3 = Label(root, text='Deployed Capital')
+    lbl3.grid(column=0, row=3)
+
+    lbl4 = Label(root, text='Error')
+    lbl4.grid(column=1, row=3)
+
+    lbl5 = Label(root, text='Profit & Loss')
+    lbl5.grid(column=0, row=4)
+
+    lbl6 = Label(root, text='Error')
+    lbl6.grid(column=1, row=4)
+
+    lbl7 = Label(root, text='Open Positions')
+    lbl7.grid(column=0, row=5)
+
+    lbl8 = Label(root, text='Error')
+    lbl8.grid(column=1, row=5)
+
+    lbl7 = Label(root, text='Closed Positions')
+    lbl7.grid(column=0, row=6)
+
+    lbl8 = Label(root, text='Error')
+    lbl8.grid(column=1, row=6)
+
 Trading_Capital()
 Initiate_Trading()
+Statisitics()
+
 root.mainloop()
