@@ -35,8 +35,8 @@ for i in range(count(Stocks)):
     File_Maker(Stocks[i])
 
 # Main Code
-Hour = 0   # If in UK value should be 14
-Min = 17    # If in UK value should be 30
+Hour = 14   # If in UK value should be 14
+Min = 30    # If in UK value should be 30
 while True:
     Time = datetime.now()
     if Time.hour == Hour and Time.minute == Min:
